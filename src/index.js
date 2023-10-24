@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
      <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <BrowserRouter basename="/login-app">
+        <BrowserRouter basename="/test-task">
           <App />
         </BrowserRouter>
       </PersistGate>

@@ -5,7 +5,7 @@ import { ReactComponent as HideIcon } from '../../images/eye-slash.svg';
 import { ReactComponent as ShowIcon } from '../../images/eye.svg';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../../redux/auth/authSlice';
+import { login } from '../../redux/auth/authSlice';
 
 import {
   Form,
@@ -43,7 +43,7 @@ export const LoginForm = () => {
       password: { value: password },
     } = e.currentTarget;
 
-    dispatch(loginSuccess({ username, password }));
+    dispatch(login({ username, password }));
     e.currentTarget.reset();
   };
 

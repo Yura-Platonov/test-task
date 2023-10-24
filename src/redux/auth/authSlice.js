@@ -5,7 +5,11 @@ import axios from 'axios';
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
   try {
     const response = await axios.post('https://technical-task-api.icapgroupgmbh.com/api/login/', credentials);
-    return response.data;
+    const userData = response.data;
+
+    dispatch(loginSuccess(userData));
+
+    return userData;
   } catch (error) {
     return rejectWithValue(error.message);
   }
@@ -57,7 +61,20 @@ export const authSlice = createSlice({
         state.error = payload.error;
         state.isLoading = false;
       });
-  },
+      builder.addCase(loginSuccess, (state, { payload }) => {
+        state.user = payload.user; // Обновите пользователя, если есть информация о пользователе
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+      });
+  
+      builder.addCase(logoutSuccess, (state) => {
+        state.user = {};
+        state.isLoggedIn = false;
+        state.isLoading = false;
+        state.error = null;
+      });
+   },
   reducers: {},
 });
 
